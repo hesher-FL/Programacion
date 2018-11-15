@@ -13,28 +13,28 @@ lineasf = 2
 z = 0 
 parar =""
 db = "aki"
-# f1 = open('./import/lista.csv','w')
-# for dirName, subdirList, fileList in os.walk(rootDir):
-#     print('Directorio encontrado: %s' % dirName)
-#     for fname in fileList:
-#         doc = load_workbook(filename = rootDir + '/' + fname)
-#         # a = doc.get_sheet_names()
-#         hoja = doc['Hoja1']
-#         for a in range(2,hoja.max_row):
-#         	ccc = hoja['A'+ str (a)].value
-#         	Naf = hoja['B'+ str (a)].value
-#         	nif = hoja['C'+ str (a)].value
-#         	FechaAlta = str(hoja['D'+ str (a)].value)
-#         	Autorizado = hoja['E'+ str (a)].value
-#         	f1.write(str(str(ccc) + ";" + str(Naf) + ";" + str(nif) + ";" + str(FechaAlta) + ";"+ str(Autorizado) + "\n"))
-# f1.close()
-# # nos conectamos a la base de dato
-# connection = pymysql.connect(host='localhost',port=3306,user='root',db = db)
-# cursor = connection.cursor()
-# sql = "LOAD DATA INFILE" + "'" + "C:\\\\Users\\\\jflores\\\\Desktop\\\\Programacion\\\\import\\\\" + "lista.csv" + "'" + "INTO TABLE Subvenciones1 CHARACTER SET UTF8 FIELDS TERMINATED BY ';' LINES TERMINATED BY '\n' (CCC, NAF, NIF, FECHAALTA, AUTORIZADO);"
-# cursor.execute(sql)
-# connection.commit()
-# connection.close()
+f1 = open('./import/lista.csv','w')
+for dirName, subdirList, fileList in os.walk(rootDir):
+    print('Directorio encontrado: %s' % dirName)
+    for fname in fileList:
+        doc = load_workbook(filename = rootDir + '/' + fname)
+        # a = doc.get_sheet_names()
+        hoja = doc['Hoja1']
+        for a in range(2,hoja.max_row):
+        	ccc = hoja['A'+ str (a)].value
+        	Naf = hoja['B'+ str (a)].value
+        	nif = hoja['C'+ str (a)].value
+        	FechaAlta = str(hoja['D'+ str (a)].value)
+        	Autorizado = hoja['E'+ str (a)].value
+        	f1.write(str(str(ccc) + ";" + str(Naf) + ";" + str(nif) + ";" + str(FechaAlta) + ";"+ str(Autorizado) + "\n"))
+f1.close()
+# nos conectamos a la base de dato
+connection = pymysql.connect(host='localhost',port=3306,user='root',db = db)
+cursor = connection.cursor()
+sql = "LOAD DATA INFILE" + "'" + "C:\\\\Users\\\\jflores\\\\Desktop\\\\Programacion\\\\import\\\\" + "lista.csv" + "'" + "INTO TABLE Subvenciones1 CHARACTER SET UTF8 FIELDS TERMINATED BY ';' LINES TERMINATED BY '\n' (CCC, NAF, NIF, FECHAALTA, AUTORIZADO);"
+cursor.execute(sql)
+connection.commit()
+connection.close()
 #consultamos las empresas con sus diferentes Autorizados
 connection1 = pymysql.connect(host='localhost',port=3306,user='root',db = db)
 cursor = connection1.cursor()
