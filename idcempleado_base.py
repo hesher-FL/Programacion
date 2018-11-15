@@ -1,10 +1,11 @@
+#### Importamos las librerias necesarias para la gestion del archivo #####
 from openpyxl import load_workbook
 import pymysql
 import os 
 import time
 from os import listdir
 
-
+### comenzamos a programar las variables #####
 rootDir = 'xlsx'
 lista =[]
 Autorizados=[]
@@ -13,6 +14,12 @@ lineasf = 2
 z = 0 
 parar =""
 db = "aki"
+
+
+### comenzamos a progrmar el codgo ###
+
+
+### bajamos en un csv el texto procesadon en el excel y lo mandamos a la ruta marcada en la variable fi.open ####
 f1 = open('./import/lista.csv','w')
 for dirName, subdirList, fileList in os.walk(rootDir):
     print('Directorio encontrado: %s' % dirName)
@@ -28,7 +35,7 @@ for dirName, subdirList, fileList in os.walk(rootDir):
         	Autorizado = hoja['E'+ str (a)].value
         	f1.write(str(str(ccc) + ";" + str(Naf) + ";" + str(nif) + ";" + str(FechaAlta) + ";"+ str(Autorizado) + "\n"))
 f1.close()
-# nos conectamos a la base de dato
+###  nos conectamos a la base de datos y procesamos la informacion #####
 connection = pymysql.connect(host='localhost',port=3306,user='root',db = db)
 cursor = connection.cursor()
 sql = "LOAD DATA INFILE" + "'" + "C:\\\\Users\\\\jflores\\\\Desktop\\\\Programacion\\\\import\\\\" + "lista.csv" + "'" + "INTO TABLE Subvenciones1 CHARACTER SET UTF8 FIELDS TERMINATED BY ';' LINES TERMINATED BY '\n' (CCC, NAF, NIF, FECHAALTA, AUTORIZADO);"
@@ -45,7 +52,6 @@ for fila in filas:
     Autorizado= fila[0]
     Autorizados.append(Autorizado)
 connection1.close()
-
 
 
 connection = pymysql.connect(host='localhost',port=3306,user='root',db = db)
